@@ -10,7 +10,6 @@ public class Walk : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveDirection;
 
- 
     // Update is called once per frame
     void Update()
     {
