@@ -33,8 +33,8 @@ public class Walk : MonoBehaviour
 
     void ProcessInputs()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        float moveX = Input.GetAxisRaw("MoveHorizontal");
+        float moveY = Input.GetAxisRaw("MoveVertical");
 
         moveDirection = new Vector2(moveX, moveY).normalized;
 

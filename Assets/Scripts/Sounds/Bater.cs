@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Sound_trigger : MonoBehaviour
+public class Bater : MonoBehaviour
 {
 
     AudioSource source;
@@ -20,31 +20,16 @@ public class Sound_trigger : MonoBehaviour
     void Awake()
     {
         controls = new PlayerController();
-        controls.Gameplay.Bater.performed += ctx => 
+        controls.Gameplay.Bater.performed += ctx => BaterBengala();
 
         source = GetComponent<AudioSource>();
         soundTrigger = GetComponent<Collider2D>();
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Bater"))
-        {
-            Debug.Log("Apertou");
-            batendo = !batendo;
-
-            if (batendo && entrou)
-            {
-                Tocar();
-            }
-            else { source.Stop(); }
-        }
-
-    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag == "Bengala")
+        if (collider.gameObject.tag == "Bengala")
         {
             entrou = true;
             if (batendo)
@@ -52,7 +37,7 @@ public class Sound_trigger : MonoBehaviour
                 Tocar();
             }
             else { source.Stop(); }
-            
+
         }
     }
 
@@ -72,7 +57,27 @@ public class Sound_trigger : MonoBehaviour
             source.Play();
             source.loop = true;
         }
-     
+
     }
 
+    void BaterBengala()
+    {
+        batendo = !batendo;
+
+        if (batendo && entrou)
+        {
+            Tocar();
+        }
+        else { source.Stop(); }
+    }
+
+    private void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
 }
