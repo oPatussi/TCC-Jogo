@@ -9,29 +9,9 @@ public class Sound_trigger : MonoBehaviour
     AudioSource source;
     Collider2D soundTrigger;
 
-    public bool Batendo;
+    public bool batendo;
     public bool entrou;
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire3"))
-        {
-            Batendo = !Batendo;
-
-            if (Batendo == false)
-            {
-                source.Stop();
-            }
-        }
-
- 
-        if (Batendo == true && entrou == true)
-        {
-            source.loop = true;
-            source.Play();
-        }
-
-    }
 
     void Awake()
     {
@@ -39,11 +19,31 @@ public class Sound_trigger : MonoBehaviour
         soundTrigger = GetComponent<Collider2D>();
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire3"))
+        {
+            batendo = !batendo;
+
+            if (batendo && entrou)
+            {
+                Tocar();
+            }
+            else { source.Stop(); }
+        }
+
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag == "Bengala")
         {
             entrou = true;
+            if (batendo)
+            {
+                Tocar();
+            }
+            else { source.Stop(); }
             
         }
     }
@@ -53,7 +53,18 @@ public class Sound_trigger : MonoBehaviour
         if (collision.gameObject.tag == "Bengala")
         {
             entrou = false;
+            source.loop = false;
         }
+    }
+
+    private void Tocar()
+    {
+        if (!source.isPlaying)
+        {
+            source.Play();
+            source.loop = true;
+        }
+     
     }
 
 }
