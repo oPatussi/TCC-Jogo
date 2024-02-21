@@ -10,6 +10,7 @@ public class TriggerArea : MonoBehaviour
     private float timer = 0f;
     private bool vibrar = false;
 
+
     AudioSource source;
     Collider2D soundTrigger;
 
@@ -69,6 +70,7 @@ public class TriggerArea : MonoBehaviour
         if(podeChamar) 
         {
             source.Play();
+            Destroy(this);
             
         }
     }
