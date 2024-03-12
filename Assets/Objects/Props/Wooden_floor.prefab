@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 974663406861147880}
   - component: {fileID: 6302572174475997431}
   - component: {fileID: 4299376494611630894}
-  - component: {fileID: -1380716244457323305}
   m_Layer: 0
   m_Name: Wooden_floor
   m_TagString: floor
@@ -228,17 +227,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1380716244457323305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363564289630381505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d002dc7974c96c74ca30d135f893237f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batendo: 0
-  entrou: 0

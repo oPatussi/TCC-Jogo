@@ -7,6 +7,8 @@ TagManager:
   - floor
   - Bengala
   - AreaTrigger
+  - bathroomFloor
+  - bedroomFloor
   layers:
   - Default
   - TransparentFX

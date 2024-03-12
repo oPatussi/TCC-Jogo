@@ -44,6 +44,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Localizar"",
+                    ""type"": ""Button"",
+                    ""id"": ""a62fc852-20b7-4d4c-88ab-3ebfab65eeee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Interagir"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2977594-c5a0-4939-bf09-89d635c7d3d4"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Localizar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Bater = m_Gameplay.FindAction("Bater", throwIfNotFound: true);
         m_Gameplay_Interagir = m_Gameplay.FindAction("Interagir", throwIfNotFound: true);
+        m_Gameplay_Localizar = m_Gameplay.FindAction("Localizar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Bater;
     private readonly InputAction m_Gameplay_Interagir;
+    private readonly InputAction m_Gameplay_Localizar;
     public struct GameplayActions
     {
         private @PlayerController m_Wrapper;
         public GameplayActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Bater => m_Wrapper.m_Gameplay_Bater;
         public InputAction @Interagir => m_Wrapper.m_Gameplay_Interagir;
+        public InputAction @Localizar => m_Wrapper.m_Gameplay_Localizar;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interagir.started += instance.OnInteragir;
             @Interagir.performed += instance.OnInteragir;
             @Interagir.canceled += instance.OnInteragir;
+            @Localizar.started += instance.OnLocalizar;
+            @Localizar.performed += instance.OnLocalizar;
+            @Localizar.canceled += instance.OnLocalizar;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -172,6 +198,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interagir.started -= instance.OnInteragir;
             @Interagir.performed -= instance.OnInteragir;
             @Interagir.canceled -= instance.OnInteragir;
+            @Localizar.started -= instance.OnLocalizar;
+            @Localizar.performed -= instance.OnLocalizar;
+            @Localizar.canceled -= instance.OnLocalizar;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -193,5 +222,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     {
         void OnBater(InputAction.CallbackContext context);
         void OnInteragir(InputAction.CallbackContext context);
+        void OnLocalizar(InputAction.CallbackContext context);
     }
 }
